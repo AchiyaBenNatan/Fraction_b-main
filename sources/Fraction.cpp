@@ -14,15 +14,27 @@ namespace ariel
         this->numerator = mone;
         this->denominator = mechane;
     }
-    int Fraction::getMone()
+    Fraction::Fraction(float n)
+    {
+        Fraction(n*1000,1000);
+    }
+    int Fraction::getNumerator()
     {
         return this->numerator;
     }
-    int Fraction::getMechane()
+    int Fraction::getDenominator()
     {
         return this->denominator;
     }
-    int Fraction::gcd(int a, int b) 
+    void Fraction::setNumerator(int num)
+    {
+        this->numerator = num;
+    }
+    void Fraction::setDenominator(int num)
+    {
+        this->denominator = num;
+    }
+    int Fraction::gcd(int a, int b)
     {
         if (b == 0)
             return a;
@@ -44,45 +56,44 @@ namespace ariel
     }
     Fraction Fraction::operator-(const Fraction& f) {
         Fraction result;
-        result.numerator = numerator * f.denominator - f.numerator * denominator;
-        result.denominator = denominator * f.denominator;
+        result.setNumerator( this->getNumerator() * f.denominator - f.numerator * this->getDenominator());
+        result.setDenominator (this->getDenominator() * f.denominator);
         return reduceFraction (result);
     }
     Fraction Fraction::operator*(const Fraction& f) {
         Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
-        return reduceFraction (result);
+        result.setNumerator(this->getNumerator() * f.numerator);
+        result.setDenominator(this->getDenominator() * f.denominator);
+        return reduceFraction(result);
     }
     Fraction Fraction::operator/(const Fraction &f)
     {
         Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
+        result.setNumerator( this->getNumerator() * f.denominator+ f.numerator * this->getDenominator());
+        result.setDenominator (this->getDenominator() * f.denominator);
         return reduceFraction (result);
     }
-    Fraction Fraction::operator+(int num)
+    Fraction Fraction::operator+(float num)
+    {
+        Fraction result;
+        
+        return reduceFraction (result);
+    }
+    Fraction Fraction::operator-(float num)
     {
         Fraction result;
         // result.mone = mone * f.mechane + f.mone * mechane;
         // result.mechane = mechane * f.mechane;
         return reduceFraction (result);
     }
-    Fraction Fraction::operator-(int num)
+    Fraction Fraction::operator*(float num)
     {
         Fraction result;
         // result.mone = mone * f.mechane + f.mone * mechane;
         // result.mechane = mechane * f.mechane;
         return reduceFraction (result);
     }
-    Fraction Fraction::operator*(int num)
-    {
-        Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
-        return reduceFraction (result);
-    }
-    Fraction Fraction::operator/(int num)
+    Fraction Fraction::operator/(float num)
     {
         Fraction result;
         // result.mone = mone * f.mechane + f.mone * mechane;
@@ -107,35 +118,28 @@ namespace ariel
         this->numerator -= this->denominator;
         return *this;
     }
-    Fraction Fraction::operator+(double num)
+    bool Fraction::operator>=(const Fraction &f)const
     {
-        Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
-        return reduceFraction (result);
+        return false;
     }
-    Fraction Fraction::operator-(double num)
+    bool Fraction::operator<=(const Fraction &f)const
     {
-        Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
-        return reduceFraction (result);
+        return false;
     }
-    Fraction Fraction::operator*(double num)
+    bool Fraction::operator==(const Fraction &f)const
     {
-        Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
-        return reduceFraction (result);
+        return false;
     }
-    Fraction Fraction::operator/(double num)
+    bool  Fraction::operator>(const Fraction &f)const
     {
-        Fraction result;
-        // result.mone = mone * f.mechane + f.mone * mechane;
-        // result.mechane = mechane * f.mechane;
-        return reduceFraction (result);
+        return false;
     }
-    Fraction operator+(double d, const Fraction& f) {
+    bool Fraction::operator<(const Fraction &f)const
+    {
+        return false;
+    }
+    Fraction operator+(double d, const Fraction &f)
+    {
         Fraction result;
         // result.mone = f.mechane * d;
         // result.mechane = f.mechane;
@@ -191,6 +195,22 @@ namespace ariel
     {
         return "";
     }
+    Fraction operator+(float d, const Fraction &f)
+    {
+        return Fraction();
+    }
+    Fraction operator-(float d, const Fraction &f)
+    {
+        return Fraction();
+    }
+    Fraction operator*(float d, const Fraction &f)
+    {
+        return Fraction();
+    }
+    Fraction operator/(float d, const Fraction &f)
+    {
+        return Fraction();
+    }
     ostream &operator<<(ostream &os, const Fraction &f)
     {
         os << "numerator: " << f.numerator << ", denominator: " << f.denominator<<endl;
@@ -205,67 +225,43 @@ namespace ariel
         inputStream >> f.numerator >> f.denominator;
         return inputStream;
     }
-    bool Fraction::operator>=(const Fraction &f)
+    bool operator>=(float n, const Fraction &f)
     {
         return false;
     }
-    bool Fraction::operator<=(const Fraction &f)
+    bool operator<=(float n, const Fraction &f)
     {
         return false;
     }
-    bool Fraction::operator==(const Fraction &f)
-    {
-        if (this->numerator==f.numerator&&this->denominator==f.denominator)
-        {
-            return true;
-        }
-        return false;
-    }
-    bool Fraction::operator>(const Fraction &f)
+    bool operator==(float n, const Fraction &f)
     {
         return false;
     }
-    bool Fraction::operator<(const Fraction &f)
+    bool operator>(float n, const Fraction &f)
     {
         return false;
     }
-    bool Fraction::operator>=(int n)
+    bool operator<(float n, const Fraction &f)
     {
         return false;
     }
-    bool Fraction::operator<=(int n)
+    bool operator>=(const Fraction &f, float n)
     {
         return false;
     }
-    bool Fraction::operator==(int n)
+    bool operator<=(const Fraction &f, float n)
     {
         return false;
     }
-    bool Fraction::operator>(int n)
+    bool operator==(const Fraction &f, float n)
     {
         return false;
     }
-    bool Fraction::operator<(int n)
+    bool operator>(const Fraction &f, float n)
     {
         return false;
     }
-    bool Fraction::operator>=(double n)
-    {
-        return false;
-    }
-    bool Fraction::operator<=(double n)
-    {
-        return false;
-    }
-    bool Fraction::operator==(double n)
-    {
-        return false;
-    }
-    bool Fraction::operator>(double n)
-    {
-        return false;
-    }
-    bool Fraction::operator<(double n)
+    bool operator<(const Fraction &f, float n)
     {
         return false;
     }
