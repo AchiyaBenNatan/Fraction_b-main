@@ -57,7 +57,7 @@ TEST_CASE("< test")
 TEST_CASE("== test false")
 {
     Fraction a(1,3), b(1,2);
-    CHECK(a!=b);
+    CHECK_FALSE(a==b);
 }
 TEST_CASE("== test true")
 {

@@ -19,7 +19,9 @@ namespace ariel
         void setNumerator(int num);
         void setDenominator(int num);
         int gcd(int mone, int mechane);
+        float fractToFloat(Fraction frac) const;
         Fraction reduceFraction(Fraction &frac);
+        Fraction reduceFraction(int mone,int mechane);
         Fraction operator+(const Fraction &frac);
         Fraction operator-(const Fraction &frac);
         Fraction operator*(const Fraction &frac);
@@ -37,21 +39,22 @@ namespace ariel
         friend Fraction operator*(float num, const Fraction &frac);
         friend Fraction operator/(float num, const Fraction &frac);
         friend ostream &operator<<(ostream &ostream, const Fraction &frac);
-        friend ostream &operator<<(Fraction frac, ostream &ostream);
         friend istream &operator>>(istream &inputStream, Fraction &frac);
         bool operator>=(const Fraction &frac)const;
         bool operator<=(const Fraction &frac)const;
         bool operator==(const Fraction &frac)const;
         bool operator>(const Fraction &frac)const;
         bool operator<(const Fraction &frac)const;
-        friend bool operator>=(float num, const Fraction &frac);
         friend bool operator<=(float num, const Fraction &frac);
+        friend bool operator>=(float num, const Fraction &frac);
         friend bool operator==(float num, const Fraction &frac);
         friend bool operator>(float num, const Fraction &frac);
         friend bool operator<(float num, const Fraction &frac);
         friend bool operator==(const Fraction &frac, float num);
         friend bool operator>(const Fraction &frac, float num);
         friend bool operator<(const Fraction &frac, float num);
+        friend bool operator<=(const Fraction &frac,float num);
+        friend bool operator>=(const Fraction &frac,float num);
         std::string toString();
     };
 }
