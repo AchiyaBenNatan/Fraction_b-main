@@ -21,7 +21,6 @@ namespace ariel
         int gcd(int mone, int mechane);
         float fractToFloat(Fraction frac) const;
         Fraction reduceFraction(Fraction &frac);
-        Fraction reduceFraction(int mone,int mechane);
         Fraction operator+(const Fraction &frac);
         Fraction operator-(const Fraction &frac);
         Fraction operator*(const Fraction &frac);
@@ -55,7 +54,6 @@ namespace ariel
         friend bool operator<(const Fraction &frac, float num);
         friend bool operator<=(const Fraction &frac,float num);
         friend bool operator>=(const Fraction &frac,float num);
-        std::string toString();
     };
 }
 #endif

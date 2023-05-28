@@ -29,4 +29,6 @@ int main() {
     cout << c++ << endl;
     cout << --c << endl;
     cout << "c >=b ? : " << (c >= b) << endl;
+    cout<<c.getNumerator()<<endl<<c.getDenominator()<<endl;
+    
 }

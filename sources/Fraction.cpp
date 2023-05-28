@@ -213,10 +213,6 @@ namespace ariel
     {
         return fractToFloat(*this)<fractToFloat(f);
     }
-    std::string Fraction::toString()
-    {
-        return "";
-    }
     Fraction operator+(float d, const Fraction &f)
     {
         d = round(d*1000)/1000;

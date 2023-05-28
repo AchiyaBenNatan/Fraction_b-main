@@ -59,7 +59,6 @@ TEST_CASE("Fraction subtraction test") {
     CHECK(__gcd(f.getNumerator(), f.getDenominator()) == 1);
 
     Fraction g = e - d; // 2/5 - 4/5 = -2/5
-    cout<<"hilo"<<g<<endl;
     CHECK(((g.getNumerator() == -2) && (g.getDenominator() == 5)));
     CHECK(__gcd(g.getNumerator(), g.getDenominator()) == 1);
 }
@@ -229,7 +228,6 @@ TEST_CASE("Output and Input Stream Operators") {
 
     // Test operator>>
     CHECK_NOTHROW(is >> b);
-    cout<<b<<endl;
     CHECK(b.getNumerator() == 5);
     CHECK(b.getDenominator() == 6);
     CHECK_THROWS(bad_is >> b); // Throws cuz the input is one number
@@ -243,7 +241,6 @@ TEST_CASE("Rounding of float numbers during arithmetic operations with Fractions
 
     b = 0.2001;
     c = a - b; // 1/5
-    cout<<"c: "<<a<<endl;
     CHECK(((c.getNumerator() == 1) && (c.getDenominator() == 5)));
 
     b = 0.2001;
